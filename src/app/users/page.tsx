@@ -11,7 +11,7 @@ export default function UsersScreen() {
   });
 
   return (
-    <div>
+    <div className="w-full flex items-center justify-center">
       {usersLoading && <Spinner />}
       {users && (
         <div className="my-[80px]">

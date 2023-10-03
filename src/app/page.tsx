@@ -100,7 +100,7 @@ export default function LoginScreen() {
       </Button>
     </form>
   ) : (
-    <div className="text-center flex flex-col gap-[10px]">
+    <div className="w-full text-center flex flex-col gap-[10px] items-center justify-center">
       <h1 className="text-2xl font-bold">We’re glad to see you again!</h1>
       <p className="text-sm text-slate-600">
         Browse the <strong>users</strong> or the <strong>products</strong>{" "}
