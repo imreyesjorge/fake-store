@@ -15,7 +15,7 @@ export function UserCard({ id, username, name, email }: IUserCardProps) {
       />
       <div className="font-medium">
         <div>
-          <small className="text-slate-600 block">{username}</small>
+          <small className="text-slate-600 block">@{username}</small>
           <h2 className="text-lg font-medium">
             {name.firstname.toUpperCase()} {name.lastname.toUpperCase()}
           </h2>
