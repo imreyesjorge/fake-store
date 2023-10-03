@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { IUseFetcher, IUseFetcherArgs } from "./types";
 
-export function useFetcher(args: IUseFetcherArgs): IUseFetcher {
-  const [data, setData] = useState<any>(null);
+export function useFetcher<T>(args: IUseFetcherArgs): IUseFetcher<T> {
+  const [data, setData] = useState<T>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -17,7 +17,12 @@ export function useFetcher(args: IUseFetcherArgs): IUseFetcher {
 
       const response = await rawResponse.json();
 
-      setData(response);
+      const mappedResponse = response.map((item) => ({
+        ...item,
+        key: crypto.randomUUID(),
+      }));
+
+      setData(mappedResponse);
     } catch (error) {
       setIsError(true);
     } finally {

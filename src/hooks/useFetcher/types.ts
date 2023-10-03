@@ -4,8 +4,8 @@ export interface IUseFetcherArgs {
   body?: any;
 }
 
-export interface IUseFetcher {
-  data: any;
+export interface IUseFetcher<T> {
+  data: T;
   isLoading: boolean;
   isError: boolean;
 }

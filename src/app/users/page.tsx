@@ -3,13 +3,12 @@
 import { Spinner } from "@nextui-org/react";
 import { useFetcher } from "../../hooks/useFetcher";
 import { UserCard } from "../../components/UserCard";
+import { IUserData } from "../../types/users";
 
 export default function UsersScreen() {
-  const {
-    data: users,
-    isLoading: usersLoading,
-    isError: usersError,
-  } = useFetcher({ url: "https://fakestoreapi.com/users" });
+  const { data: users, isLoading: usersLoading } = useFetcher<IUserData[]>({
+    url: "https://fakestoreapi.com/users",
+  });
 
   return (
     <div>
