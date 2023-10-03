@@ -11,14 +11,17 @@ export default function LoginScreen() {
     username: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { setUser } = useUserContext();
+  const { user, setUser } = useUserContext();
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (!(formData.username && formData.password)) {
       toast.error(`Please provide a valid username and password.`);
+      setIsLoading(false);
       return;
     }
 
@@ -46,6 +49,8 @@ export default function LoginScreen() {
       // Use `anon` as a token if the service failed
       localStorage.setItem("token", "anon");
       setUser({ token: "anon" });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -56,13 +61,13 @@ export default function LoginScreen() {
     }));
   };
 
-  return (
+  return !user ? (
     <form
       className="w-[400px] mx-auto flex flex-col gap-[20px]"
       onSubmit={handleFormSubmit}
     >
       <div className="text-center flex flex-col gap-[10px]">
-        <h1 className="text-2xl font-bold">We’re glad to see you again!</h1>
+        <h1 className="text-2xl font-bold">Welcome to FakeStore</h1>
         <p className="text-sm text-slate-600">
           Use your credentials to access the store
         </p>
@@ -83,9 +88,24 @@ export default function LoginScreen() {
         value={formData.password}
         onChange={handleValueChange}
       />
-      <Button fullWidth size="lg" color="primary" disableRipple type="submit">
+      <Button
+        fullWidth
+        size="lg"
+        color="primary"
+        disableRipple
+        type="submit"
+        isLoading={isLoading}
+      >
         Login
       </Button>
     </form>
+  ) : (
+    <div className="text-center flex flex-col gap-[10px]">
+      <h1 className="text-2xl font-bold">We’re glad to see you again!</h1>
+      <p className="text-sm text-slate-600">
+        Browse the <strong>users</strong> or the <strong>products</strong>{" "}
+        pages.
+      </p>
+    </div>
   );
 }

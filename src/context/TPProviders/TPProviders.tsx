@@ -12,7 +12,7 @@ export function TPProviders({ children }: TPProvidersProps) {
         <>
           {children}
           <Toaster
-            position="top-right"
+            position="bottom-right"
             toastOptions={{
               style: {
                 borderRadius: "10px",

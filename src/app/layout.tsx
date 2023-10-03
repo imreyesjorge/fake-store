@@ -1,5 +1,6 @@
 import { AppNavbar } from "../components/AppNavbar";
 import { TPProviders } from "../context/TPProviders";
+import { GlobalEffect } from "./GlobalEffect";
 import "./globals.css";
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <TPProviders>
+          <GlobalEffect />
           <div className="dark text-foreground bg-background min-h-screen">
             <div className="max-w-[1024px] mx-auto flex flex-col min-h-screen">
               <AppNavbar />
