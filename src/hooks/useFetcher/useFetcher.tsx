@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { UseFetcher, UseFetcherArgs } from "./types";
+import { IUseFetcher, IUseFetcherArgs } from "./types";
 
-export function useFetcher(args: UseFetcherArgs): UseFetcher {
+export function useFetcher(args: IUseFetcherArgs): IUseFetcher {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);

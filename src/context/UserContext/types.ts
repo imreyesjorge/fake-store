@@ -9,6 +9,6 @@ export interface IUser {
   token: string;
 }
 
-export interface UserProviderProps {
+export interface IUserProviderProps {
   children?: ReactNode;
 }

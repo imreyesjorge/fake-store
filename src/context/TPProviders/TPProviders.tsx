@@ -1,11 +1,11 @@
 "use client";
 
 import { NextUIProvider } from "@nextui-org/react";
-import { TPProvidersProps } from "./types";
+import { ITPProvidersProps } from "./types";
 import { Toaster } from "react-hot-toast";
 import { UserProvider } from "../UserContext";
 
-export function TPProviders({ children }: TPProvidersProps) {
+export function TPProviders({ children }: ITPProvidersProps) {
   return (
     <NextUIProvider>
       <UserProvider>

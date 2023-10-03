@@ -1,4 +1,4 @@
-export interface FormData {
+export interface IFormData {
   username: string;
   password: string;
 }

@@ -1,3 +1,24 @@
+"use client";
+
+import { Spinner } from "@nextui-org/react";
+import { useFetcher } from "../../hooks/useFetcher";
+import { useEffect } from "react";
+
 export default function UsersScreen() {
-  return <h1 className="text-2xl font-bold">Users Screen</h1>;
+  const {
+    data: users,
+    isLoading: usersLoading,
+    isError: usersError,
+  } = useFetcher({ url: "https://fakestoreapi.com/users" });
+
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
+
+  return (
+    <div>
+      {usersLoading && <Spinner />}
+      {users && <p>Data fetched</p>}
+    </div>
+  );
 }

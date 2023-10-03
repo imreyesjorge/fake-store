@@ -2,12 +2,12 @@
 
 import { Button, Input } from "@nextui-org/react";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
-import { FormData } from "./types";
+import { IFormData } from "./types";
 import toast from "react-hot-toast";
 import { useUserContext } from "../context/UserContext";
 
 export default function LoginScreen() {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<IFormData>({
     username: "",
     password: "",
   });

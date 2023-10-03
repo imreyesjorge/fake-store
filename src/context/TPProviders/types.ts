@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
 
-export interface TPProvidersProps {
+export interface ITPProvidersProps {
   children?: ReactNode;
 }
