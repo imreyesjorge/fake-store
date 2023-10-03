@@ -14,8 +14,12 @@ import {
 import { useFetcher } from "../../hooks/useFetcher";
 import { IProduct } from "../../types/products";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function ProductsScreen() {
+  const [sortedProducts, setSortedProducts] = useState<IProduct[]>([]);
+  const [sortDescriptor, setSortDescriptor] = useState<any>(undefined);
+
   const { data: products, isLoading: productsLoading } = useFetcher<IProduct[]>(
     {
       url: "https://fakestoreapi.com/products",
@@ -41,28 +45,10 @@ export default function ProductsScreen() {
     },
   ];
 
-  const rows = products;
-
   const renderCell = (item, columnKey) => {
     if (columnKey === "actions") {
       return (
         <div className="flex gap-[10px]">
-          {/* <Button variant="flat" color="danger" isIconOnly>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-4 h-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-              />
-            </svg>
-          </Button> */}
           <Button
             as={Link}
             variant="flat"
@@ -92,6 +78,25 @@ export default function ProductsScreen() {
     return getKeyValue(item, columnKey);
   };
 
+  useEffect(() => {
+    console.log(sortDescriptor)
+
+    if (!sortDescriptor && products) {
+      setSortedProducts(products);
+      return;
+    }
+
+    if (products) {
+      const sorted = products.sort((a, b) => {
+        if (sortDescriptor.direction === "ascending") {
+          return b[sortDescriptor.column] - a[sortDescriptor.column];
+        }
+        return a[sortDescriptor.column] - b[sortDescriptor.column];
+      });
+      setSortedProducts(sorted);
+    }
+  }, [products, sortDescriptor]);
+
   return (
     <div className="w-full my-[80px] flex justify-center items-center">
       {productsLoading && <Spinner />}
@@ -102,9 +107,11 @@ export default function ProductsScreen() {
             <p className="text-slate-600">You’re now seeing all the products</p>
           </div>
           <Table
-            onSortChange={(event) => {
-              console.log(event);
+            aria-label="Products Table"
+            onSortChange={(sortStatus) => {
+              setSortDescriptor(sortStatus);
             }}
+            sortDescriptor={sortDescriptor}
           >
             <TableHeader columns={columns}>
               {(column) => (
@@ -113,7 +120,7 @@ export default function ProductsScreen() {
                 </TableColumn>
               )}
             </TableHeader>
-            <TableBody items={rows}>
+            <TableBody items={sortedProducts}>
               {(item) => (
                 <TableRow>
                   {(columnKey) => (
