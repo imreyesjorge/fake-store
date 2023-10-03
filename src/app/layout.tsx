@@ -19,7 +19,7 @@ export default function RootLayout({
         <TPProviders>
           <GlobalEffect />
           <div className="dark text-foreground bg-background min-h-screen">
-            <div className="max-w-[1024px] mx-auto flex flex-col min-h-screen">
+            <div className="max-w-[1024px] mx-auto flex flex-col min-h-screen px-[10px]">
               <AppNavbar />
               <div className="flex flex-1 items-center justify-center">
                 {children}
