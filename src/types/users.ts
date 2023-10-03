@@ -10,7 +10,7 @@ export interface IUserData {
   };
   address: {
     city: string;
-    number: number;
+    number: number | string;
     street: string;
     zipcode: string;
     geolocation: {
