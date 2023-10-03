@@ -4,12 +4,15 @@ import { Button, Input } from "@nextui-org/react";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { FormData } from "./types";
 import toast from "react-hot-toast";
+import { useUserContext } from "../context/UserContext";
 
 export default function LoginScreen() {
   const [formData, setFormData] = useState<FormData>({
     username: "",
     password: "",
   });
+
+  const { setUser } = useUserContext();
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -36,11 +39,13 @@ export default function LoginScreen() {
 
       // Set the token to the localStorage
       localStorage.setItem("token", responseData.token);
+      setUser({ token: "anon" });
     } catch (error) {
       toast.error(error.message);
 
       // Use `anon` as a token if the service failed
       localStorage.setItem("token", "anon");
+      setUser({ token: "anon" });
     }
   };
 

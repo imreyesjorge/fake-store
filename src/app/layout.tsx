@@ -19,7 +19,9 @@ export default function RootLayout({
           <div className="dark text-foreground bg-background min-h-screen">
             <div className="max-w-[1024px] mx-auto flex flex-col min-h-screen">
               <AppNavbar />
-              <div className="flex flex-1 items-center justify-center">{children}</div>
+              <div className="flex flex-1 items-center justify-center">
+                {children}
+              </div>
             </div>
           </div>
         </TPProviders>
