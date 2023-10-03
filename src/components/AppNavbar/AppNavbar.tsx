@@ -25,7 +25,9 @@ export function AppNavbar() {
   return (
     <Navbar>
       <NavbarBrand>
-        <p className="font-bold text-inherit">FAKESTORE</p>
+        <Link href="/" className="font-bold text-inherit">
+          FAKESTORE
+        </Link>
       </NavbarBrand>
       {user && (
         <NavbarContent justify="end">
